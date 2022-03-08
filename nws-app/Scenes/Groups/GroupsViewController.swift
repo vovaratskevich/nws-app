@@ -6,17 +6,24 @@
 //
 
 import UIKit
+import SwiftUI
 
 class GroupsViewController: UIViewController {
+    
+    @IBOutlet private weak var theContainer: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setStrings()
+        let childView = UIHostingController(rootView: ContentView())
+        addChild(childView)
+        childView.view.frame = theContainer.bounds
+        theContainer.addSubview(childView.view)
+        //setStrings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.isHidden = true
     }
     
 
