@@ -6,19 +6,30 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+
 
 struct Home: View {
     @ObservedObject var blogData = BlogViewModel()
     @State private var isActive = false
+    @State private var searchingFor = ""
     
     // Color Based on ColorScheme...
     @Environment(\.colorScheme) var scheme
+    
+    var results: [Post]? {
+        if searchingFor.isEmpty {
+            return blogData.posts
+        } else {
+            return blogData.posts?.filter { $0.group.contains(searchingFor)}
+        }
+    }
     
     var body: some View {
         
         VStack{
             
-            if let posts = blogData.posts{
+            if let posts = results {
                 
                 // No Posts...
                 if posts.isEmpty{
@@ -36,6 +47,8 @@ struct Home: View {
                 else{
                     
                     List(posts){post in
+                        
+                        
                         
                         // CardView...
                         CardView(post: post)
@@ -62,6 +75,7 @@ struct Home: View {
             
         }
         .navigationTitle("Новости групп")
+        .searchable(text: $searchingFor, prompt: "Поиск по группам")
         
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .overlay(
@@ -74,6 +88,7 @@ struct Home: View {
                 Image(systemName: "plus")
                     .font(.title2.bold())
                     .foregroundColor(scheme == .dark ? .black : .white)
+                    .disabled(isActive)
                     .padding()
                     .background(.primary,in: Circle())
             })
@@ -82,7 +97,6 @@ struct Home: View {
             .disabled(isActive == false)
             ,alignment: .bottomTrailing
         )
-        
         // fetching Blog Posts...
         .task {
             let userDefault = UserDefaults.standard
@@ -121,7 +135,7 @@ struct Home: View {
     }
     
     @ViewBuilder
-    func CardView(post: Post)->some View{
+    func CardView(post: Post) -> some View{
         
         // Detail View...
         NavigationLink {

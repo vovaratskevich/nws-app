@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -45,7 +46,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                                              groupsNavigationController,
                                              settingsNavigationController], animated: true)
         
-        homeNavigationController.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 0)
+        homeNavigationController.tabBarItem = UITabBarItem(image: #imageLiteral(resourceName: "favorite"))
         newsNavigationController.tabBarItem = UITabBarItem(image: #imageLiteral(resourceName: "feed"))
         groupsNavigationController.tabBarItem = UITabBarItem(image: #imageLiteral(resourceName: "rssChannel"))
         //channelNavigationController.tabBarItem = UITabBarItem(image: #imageLiteral(resourceName: "rssChannel"))

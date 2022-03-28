@@ -11,13 +11,14 @@ import UIKit
 extension UITabBarController {
     
     func setupView() {
-        tabBar.isTranslucent = false
-        tabBar.tintColor = UIColor.black
-        tabBar.unselectedItemTintColor = UIColor.black.withAlphaComponent(0.15)
-        tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
-        tabBar.layer.shadowRadius = 2
-        tabBar.layer.shadowColor = UIColor.gray.cgColor
-        tabBar.layer.shadowOpacity = 0.6
+        UITabBar.appearance().barTintColor = UIColor.systemBackground
+//        tabBar.isTranslucent = false
+//        tabBar.tintColor = UIColor.black
+//        tabBar.unselectedItemTintColor = UIColor.black.withAlphaComponent(0.15)
+//        tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+//        tabBar.layer.shadowRadius = 2
+//        tabBar.layer.shadowColor = UIColor.gray.cgColor
+//        tabBar.layer.shadowOpacity = 0.6
     }
     
 }

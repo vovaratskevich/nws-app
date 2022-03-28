@@ -36,14 +36,15 @@ class NewsTableViewCell: UITableViewCell {
     
     private let newsTitleLabel: UILabel = {
         let lable = UILabel()
-        lable.numberOfLines = 0
-        lable.font = .systemFont(ofSize: 25, weight: .medium)
+        lable.numberOfLines = 2
+        lable.textColor = .white
+        lable.font = .systemFont(ofSize: 25, weight: .bold)
         return lable
     }()
     
     private let newsDescriptionLabel: UILabel = {
         let lable = UILabel()
-        lable.numberOfLines = 0
+        lable.numberOfLines = 3
         lable.font = .systemFont(ofSize: 18 , weight: .medium)
         lable.textColor = .gray
         return lable
@@ -53,15 +54,16 @@ class NewsTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.backgroundColor = .gray
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
      
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(newsImageView)
         contentView.addSubview(newsTitleLabel)
         contentView.addSubview(newsDescriptionLabel)
-        contentView.addSubview(newsImageView)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -71,26 +73,37 @@ class NewsTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        newsTitleLabel.frame = CGRect(
-            x: 10,
-            y: 0,
-            width: contentView.frame.size.width - 180,
-            height: 70
-        )
+        newsImageView.layer.cornerRadius = 10
         
-        newsDescriptionLabel.frame = CGRect(
-            x: 10,
-            y: 70,
-            width: contentView.frame.size.width - 180,
-            height: contentView.frame.size.height/2
-        )
+//        newsImageView.translatesAutoresizingMaskIntoConstraints = false
+//        newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+//        newsImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+//        newsImageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+//        newsImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
         newsImageView.frame = CGRect(
-            x: contentView.frame.size.width - 150,
+            //x: contentView.frame.size.width - 150,
+            x: 10,
             y: 10,
-            width: 160,
-            height: contentView.frame.size.height - 40
+            width: contentView.frame.size.width - 20,
+            height: 160
         )
+        
+        newsTitleLabel.frame = CGRect(
+            x: 20,
+            y: 90,
+            width: contentView.frame.size.width - 40,
+            height: 70
+        )
+
+        newsDescriptionLabel.frame = CGRect(
+            x: 20,
+            y: 150,
+            width: contentView.frame.size.width - 40,
+            height: contentView.frame.size.height/2
+        )
+
+        
     }
     
     override func prepareForReuse() {

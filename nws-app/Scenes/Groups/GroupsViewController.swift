@@ -15,15 +15,17 @@ class GroupsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let childView = UIHostingController(rootView: ContentView())
+        childView.tabBarController?.tabBar.barTintColor = UIColor.systemBackground
         addChild(childView)
         childView.view.frame = theContainer.bounds
         theContainer.addSubview(childView.view)
-        //setStrings()
+        setStrings()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        UITabBar.appearance().barTintColor = UIColor.systemBackground
     }
     
 

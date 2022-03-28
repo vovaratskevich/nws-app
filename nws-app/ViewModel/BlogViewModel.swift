@@ -55,7 +55,7 @@ class BlogViewModel: ObservableObject {
     
     func fetchPosts() async {
         do {
-            let db = Firestore.firestore().collection("Blog")
+            let db = Firestore.firestore().collection("Blog").order(by: "date", descending: true)
             let posts = try await db.getDocuments()
             
             self.posts = posts.documents.compactMap({ post in
@@ -73,6 +73,9 @@ class BlogViewModel: ObservableObject {
         let index = posts?.firstIndex(where: { currentPost in
             return currentPost.id == post.id
         }) ?? 0
+        
+        // deleting Post...
+        Firestore.firestore().collection("Blog").document(post.id ?? "").delete()
         
         withAnimation {
             posts?.remove(at: index)

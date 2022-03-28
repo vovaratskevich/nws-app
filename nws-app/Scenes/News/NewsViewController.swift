@@ -11,9 +11,19 @@ import SafariServices
 
 class NewsViewController: UIViewController {
     
+    let searchController = UISearchController()
+    
     private var rssItems = [RSSItem]()
     
     private var viewModels = [NewsTableViewCellViewModel]()
+    private var filteredViewModels = [NewsTableViewCellViewModel]()
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
     
     private let tableView: UITableView = {
         let table = UITableView()
@@ -25,11 +35,17 @@ class NewsViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetchData()
+        navigationItem.searchController = searchController
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Поиск по названию"
+        definesPresentationContext = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+        //tabBarController?.tabBar.backgroundColor = .white
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,6 +96,9 @@ class NewsViewController: UIViewController {
 extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredViewModels.count
+        }
         return viewModels.count
     } 
     
@@ -87,15 +106,31 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: NewsTableViewCell.identifier, for: indexPath) as? NewsTableViewCell else {
             fatalError()
         }
-        cell.configure(with: viewModels[indexPath.row ])
+        
+        var viewModel: NewsTableViewCellViewModel
+        
+        if isFiltering {
+            viewModel = filteredViewModels[indexPath.row]
+        } else {
+            viewModel = viewModels[indexPath.row]
+        }
+        
+        cell.configure(with: viewModel)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let rssItem = rssItems[indexPath.row]
         
-        guard let url = URL(string: rssItem.link) else {
+        var viewModel: NewsTableViewCellViewModel
+        
+        if isFiltering {
+            viewModel = filteredViewModels[indexPath.row]
+        } else {
+            viewModel = viewModels[indexPath.row]
+        }
+        
+        guard let url = URL(string: viewModel.link) else {
             return
         }
         
@@ -104,7 +139,21 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 150 
+        return 260
+    }
+}
+
+extension NewsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filteredContentForSearchText(searchController.searchBar.text!)
+    }
+    
+    private func filteredContentForSearchText(_ searchText: String) {
+        filteredViewModels = viewModels.filter({ (viewModels: NewsTableViewCellViewModel) -> Bool in
+            return viewModels.title.lowercased().contains(searchText.lowercased() )
+        })
+        
+        tableView.reloadData()
     }
 }
 

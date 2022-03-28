@@ -49,6 +49,7 @@
 		9B97377E27D7BBC500A5F8C6 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B97377D27D7BBC500A5F8C6 /* Utilities.swift */; };
 		9B97378027D7C6F900A5F8C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B97377F27D7C6F900A5F8C6 /* Constants.swift */; };
 		9BA4BA9327D67DCC00519734 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA4BA9227D67DCC00519734 /* TextView.swift */; };
+		9BF5F9B627F251BF007E757C /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF5F9B527F251BF007E757C /* MeetingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		9B97377D27D7BBC500A5F8C6 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		9B97377F27D7C6F900A5F8C6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		9BA4BA9227D67DCC00519734 /* TextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextView.swift; sourceTree = "<group>"; };
+		9BF5F9B527F251BF007E757C /* MeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				9B1BADCC279AEA1700E4C5CB /* SettingsViewController.swift */,
+				9BF5F9B527F251BF007E757C /* MeetingViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF5F9B627F251BF007E757C /* MeetingViewController.swift in Sources */,
 				9B1BADCF279AEEAF00E4C5CB /* RSSItem.swift in Sources */,
 				9B1BADD7279AF12B00E4C5CB /* UITabBar+Extension.swift in Sources */,
 				9B1E7DD327C2A11300D35AA7 /* ContentView.swift in Sources */,

@@ -128,7 +128,7 @@ struct CreatePost: View {
                             
                         }))
                         .alert("Уверены, что хотите удалить?", isPresented: $content.showDeleteAlert) {
-                            
+                                                        
                             Button("Удалить",role: .destructive){
                                 // Deleting Content...
                                 let index = postContent.firstIndex { currentPost in

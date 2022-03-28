@@ -19,6 +19,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     
     @IBOutlet weak var succesLabel: UILabel!
+    @IBOutlet weak var aboutButton: UIButton!
+    @IBOutlet weak var subtitleLabel: UILabel!
+    @IBOutlet weak var tutorialButton: UIButton!
+    @IBOutlet weak var exitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,11 +41,19 @@ class SettingsViewController: UIViewController {
         if(savedData){
             loginStackView.isHidden = true
             succesLabel.isHidden = false
+            subtitleLabel.isHidden = false
+            aboutButton.isHidden = false
+            tutorialButton.isHidden = false
             logoutButton.isHidden = false
+            exitButton.isHidden = false
         }else{
             loginStackView.isHidden = false
             succesLabel.isHidden = true
+            subtitleLabel.isHidden = true
+            aboutButton.isHidden = true
+            tutorialButton.isHidden = true
             logoutButton.isHidden = true
+            exitButton.isHidden = true
         }
     }
     
@@ -91,22 +103,29 @@ class SettingsViewController: UIViewController {
         
         loginStackView.isHidden = false
         succesLabel.isHidden = true
+        subtitleLabel.isHidden = true
+        aboutButton.isHidden = true
+        tutorialButton.isHidden = true
         logoutButton.isHidden = true
+        exitButton.isHidden = true
         
         viewWillAppear(true)
     }
     
     private func transitionToWelcomes() {
-//        let welcomeViewController = storyboard?.instantiateViewController(identifier: Constants.Storyboard.welcomeViewController)
-//
-//        view.window?.rootViewController = welcomeViewController
-//        view.window?.makeKeyAndVisible()
+//        let meetingVC = (storyboard?.instantiateViewController(identifier: "MeetingViewController") as? MeetingViewController)!
+//        navigationController?.pushViewController(meetingVC, animated: true)
+        
         emailTextField.text = ""
         passwordTextField.text = ""
         
         loginStackView.isHidden = true
         succesLabel.isHidden = false
+        subtitleLabel.isHidden = false
+        aboutButton.isHidden = false
+        tutorialButton.isHidden = false
         logoutButton.isHidden = false
+        exitButton.isHidden = false
     }
 }
 
